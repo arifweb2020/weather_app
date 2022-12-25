@@ -4,3 +4,80 @@
   box-sizing: border-box;
 }
 
+.topContainer{
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.headerLeft{
+
+  border-right: 2px solid hsl(200, 100%, 10%);
+  position: relative;
+  left: -41px;
+  top: -90px;
+  height: 107px;
+}
+
+/* .daily{
+  display: flex;
+  justify-content: center;
+}
+
+ .cardCon{
+  background-color: #f1f1f1;
+  width: 100px;
+  margin: 10px;
+  text-align: center;
+  line-height: 75px;
+  font-size: 15px;
+} */
+
+.dailyImg{
+  display: flex;
+  justify-content: center;
+}
+
+.dailyImg > div{
+  background-color: #f1f1f1;
+  text-align: center;
+  width: 100px;
+  margin: 10px;
+  height: 60px;
+    padding-top: 14px;
+
+}
+
+.dailyday{
+  display: flex;
+  justify-content: center;
+}
+
+.dailyday > div{
+  background-color: #f1f1f1;
+  width: 100px; 
+  margin: 10px;
+   text-align: center;
+  line-height: 40px; 
+  font-size: 15px;
+  position: relative;
+  top: -20px;
+
+}
+
+.dailyWeather{
+  display: flex;
+  justify-content: center;
+}
+
+.dailyWeather > div{
+  background-color: #f1f1f1;
+  width: 100px; 
+  margin: 10px;
+   text-align: center;
+  line-height: 8px; 
+  font-size: 15px;
+  position: relative;
+  top: -40px;
+padding-bottom: 20px;
+}
+
