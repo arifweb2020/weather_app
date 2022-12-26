@@ -7,6 +7,7 @@ import cloudSun from './icons/cloud-sun.svg';
 import showers from './icons/cloud-showers-heavy.svg';
 import snowflake from './icons/snowflake.svg';
 import bolt from './icons/cloud-bolt.svg';
+import Loader from './components/loader/Loaders';
 // import { ICON_MAP } from './common/iconsMap';
 
 
@@ -34,7 +35,7 @@ function App() {
         setLat(position.coords.latitude);
         setLng(position.coords.longitude);
       }, () => {
-        alert('Unable to retrieve your location');
+        alert('Allow to access your location');
       });
     }
   }
@@ -151,12 +152,12 @@ function App() {
     return x.toLocaleString("en-US", { weekday: "long" })
   }
 
-  const indexNum = [0, 1, 2, 3, 4, 5, 6]
+ 
 
   return (
     <>
       {
-        loading ? "plz wait" : <div className='container mt-5'>
+        loading ? <Loader/> : <div className='container mt-5'>
           {/* <h1 className='text-center'>Weather App </h1> */}
 
           <div className='row topContainer' >
