@@ -38,7 +38,7 @@ function App() {
         setLat(position.coords.latitude);
         setLng(position.coords.longitude);
       }, () => {
-        alert('Allow to access your location');
+        alert('Allow to access your location and refresh the page');
       });
     }
   }
