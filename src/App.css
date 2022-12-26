@@ -86,8 +86,8 @@ padding-bottom: 20px;
   height: 80px;
 }
 .drowText{
-  position: relative;
-  top: 7px;
+  /* position: relative;
+  top: 7px; */
 }
 
 @media (max-width:900px){

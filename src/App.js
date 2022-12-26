@@ -238,19 +238,6 @@ function App() {
           <div className='row mt-5 myScroll'>
 
 
-            <table className="table">
-              <thead>
-                <tr>
-                  <th>Days</th>
-                  <th>Weather</th>
-                  <th>Temp</th>
-                  <th>FL Temp</th>
-                  <th>Wind</th>
-                  <th>Precip</th>
-                </tr>
-              </thead>
-            </table>
-
 
 
             
@@ -274,28 +261,28 @@ function App() {
               <div className='col-md-2 col'>
                 {
                   hourly?.temperature_2m?.map((ele) => {
-                    return <div className='tdrow'><span className='drowText'>{Math.round(ele)}&deg;C</span></div>
+                    return <div className='tdrow'><span className='drowText'>TEMP<br/>{Math.round(ele)}&deg;C</span></div>
                   })
                 }
               </div>
               <div className='col-md-2 col'>
                 {
                   hourly?.apparent_temperature?.map((ele) => {
-                    return <div className='tdrow'><span className='drowText'>{Math.round(ele)}&deg;C</span></div>
+                    return <div className='tdrow'><span className='drowText'>FL TEMP<br/>{Math.round(ele)}&deg;C</span></div>
                   })
                 }
               </div>
               <div className='col-md-2 col'>
                 {
                   hourly?.windspeed_10m?.map((ele) => {
-                    return <div className='tdrow'><span className='drowText'>{ele}mph</span></div>
+                    return <div className='tdrow'><span className='drowText'>WIND<br/>{ele}mph</span></div>
                   })
                 }
               </div>
               <div className='col-md-2 col'>
                 {
                   hourly?.precipitation?.map((ele) => {
-                    return <div className='tdrow'><span className='drowText'>{ele}in</span></div>
+                    return <div className='tdrow'><span className='drowText'>PRECIP<br/>{ele}in</span></div>
                   })
                 }
               </div>
