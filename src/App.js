@@ -23,7 +23,10 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [current, setCurrent] = useState({})
   const [daily, setDaily] = useState({})
-  console.log("daily ", daily)
+  const [hourly, setHourly] = useState({})
+
+  const hourlyArray = [hourly]
+  console.log("hourlyArray", hourlyArray)
 
   const getLocation = () => {
     if (!navigator.geolocation) {
@@ -52,6 +55,7 @@ function App() {
       if (current && res1.current_weather) {
         setCurrent(res1?.current_weather)
         setDaily(res1?.daily)
+        setHourly(res1?.hourly)
         setLoading(false)
       }
 
@@ -152,12 +156,17 @@ function App() {
     return x.toLocaleString("en-US", { weekday: "long" })
   }
 
- 
+
+  const timeObject = (mils) => {
+    const x = new Date(mils * 1000)
+    return x.toLocaleString("en-US", { hour: "numeric" })
+  }
+
 
   return (
     <>
       {
-        loading ? <Loader/> : <div className='container mt-5'>
+        loading ? <Loader /> : <div className='container mt-5'>
           {/* <h1 className='text-center'>Weather App </h1> */}
 
           <div className='row topContainer' >
@@ -219,16 +228,85 @@ function App() {
                   )
                 }
               </div>
+            </div>
+
+          </div>
+
+
+          {/* Hourly data show */}
+
+          <div className='row mt-5 myScroll'>
+
+
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>Days</th>
+                  <th>Weather</th>
+                  <th>Temp</th>
+                  <th>FL Temp</th>
+                  <th>Wind</th>
+                  <th>Precip</th>
+                </tr>
+              </thead>
+            </table>
 
 
 
-
+            
+              <div className='col-md-2 col'>
+                {
+                  hourly?.time?.map((ele) => {
+                    return <div className='tdrow'>{dateObject(ele)}<br />
+                      {timeObject(ele)}
+                    </div>
+                  }
+                  )
+                }
+              </div>
+              <div className='col-md-2 col'>
+                {
+                  hourly?.weathercode?.map((ele) => {
+                    return <div className='tdrow'>{getSmallIconUrl(ele)}</div>
+                  })
+                }
+              </div>
+              <div className='col-md-2 col'>
+                {
+                  hourly?.temperature_2m?.map((ele) => {
+                    return <div className='tdrow'><span className='drowText'>{Math.round(ele)}&deg;C</span></div>
+                  })
+                }
+              </div>
+              <div className='col-md-2 col'>
+                {
+                  hourly?.apparent_temperature?.map((ele) => {
+                    return <div className='tdrow'><span className='drowText'>{Math.round(ele)}&deg;C</span></div>
+                  })
+                }
+              </div>
+              <div className='col-md-2 col'>
+                {
+                  hourly?.windspeed_10m?.map((ele) => {
+                    return <div className='tdrow'><span className='drowText'>{ele}mph</span></div>
+                  })
+                }
+              </div>
+              <div className='col-md-2 col'>
+                {
+                  hourly?.precipitation?.map((ele) => {
+                    return <div className='tdrow'><span className='drowText'>{ele}in</span></div>
+                  })
+                }
+              </div>
             </div>
 
 
           </div>
 
-        </div>
+        
+        
+        
       }
     </>
 
