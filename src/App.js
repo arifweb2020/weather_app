@@ -8,6 +8,7 @@ import showers from './icons/cloud-showers-heavy.png';
 import snowflake from './icons/snowflake.svg';
 import bolt from './icons/cloud-bolt.png';
 import Loader from './components/loader/Loaders';
+import { mydata } from './data';
 // import { ICON_MAP } from './common/iconsMap';
 
 
@@ -16,6 +17,41 @@ function App() {
   // const url = "https://api.open-meteo.com/v1/forecast?hourly=temperature_2m,apparent_temperature,precipitation,weathercode,windspeed_10m&daily=weathercode,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min&current_weather=true&windspeed_unit=mph&timeformat=unixtime"
 
 
+  // const arif = [
+  //   {
+  //     id: 1,
+  //     courses: [
+  //       {
+  //         name: "test",
+  //         CourseSubscriptionPlans_course: [
+  //           {
+  //             id: 2,
+  //             validity: 5
+  //           }
+  //         ]
+  //       }
+  //       ,
+
+  //       {
+  //         name: "test1",
+  //         CourseSubscriptionPlans_course: [
+  //           {
+  //             id: 3,
+  //             validity: 6
+  //           }
+  //         ]
+  //       }
+  //     ]
+  //   }
+  // ]
+
+  // console.log("arif ", arif.map(ele=>ele.courses))
+
+  // const dm = arif.map(ele=>ele.courses)
+  // console.log("dm ", dm[0].map(ele=>ele.CourseSubscriptionPlans_course))
+
+  // const lm = dm[0].map(ele=>ele.CourseSubscriptionPlans_course[0])
+  // console.log("lm ", lm)
 
   const [lat, setLat] = useState(null);
   const [lng, setLng] = useState(null);
@@ -24,6 +60,15 @@ function App() {
   const [current, setCurrent] = useState({})
   const [daily, setDaily] = useState({})
   const [hourly, setHourly] = useState({})
+
+  const x1 = mydata?.map(ele =>ele.courses )
+  console.log("x1" , [x1])
+
+  const x2 = x1[0]?.map(ele=> ele.CourseSubscriptionPlans_course)
+  console.log("x2" , x2)
+
+  const x3= x2
+  console.log("x3" , x3)
 
   const hourlyArray = [hourly]
   console.log("hourlyArray", hourlyArray)
@@ -165,10 +210,33 @@ function App() {
 
   return (
     <>
+      
       {
         loading ? <Loader /> : <div className='container mt-5'>
           {/* <h1 className='text-center'>Weather App </h1> */}
-
+<div className='row'>
+{mydata?.map((ele, i) => {
+        return (
+          <div className='col-md-4' key={i}>
+            {ele?.name}
+            <>
+              {ele?.courses?.map((hg, l) => {
+                return (
+                  <p key={l}>
+                    {hg.name}
+                    <>
+                      {hg?.CourseSubscriptionPlans_course?.map((lg, t) => {
+                        return <p key={t}>{lg?.validity}</p>;
+                      })}
+                    </>
+                  </p>
+                );
+              })}
+            </>
+          </div>
+        );
+      })}
+</div>
           <div className='row topContainer' >
 
             <div className='col-md-6 '>
@@ -240,60 +308,60 @@ function App() {
 
 
 
-            
-              <div className='col-md-2 col'>
-                {
-                  hourly?.time?.map((ele) => {
-                    return <div className='tdrow'>{dateObject(ele)}<br />
-                      {timeObject(ele)}
-                    </div>
-                  }
-                  )
+
+            <div className='col-md-2 col'>
+              {
+                hourly?.time?.map((ele) => {
+                  return <div className='tdrow'>{dateObject(ele)}<br />
+                    {timeObject(ele)}
+                  </div>
                 }
-              </div>
-              <div className='col-md-2 col'>
-                {
-                  hourly?.weathercode?.map((ele) => {
-                    return <div className='tdrow'>{getSmallIconUrl(ele)}</div>
-                  })
-                }
-              </div>
-              <div className='col-md-2 col'>
-                {
-                  hourly?.temperature_2m?.map((ele) => {
-                    return <div className='tdrow'><span className='drowText'>TEMP<br/>{Math.round(ele)}&deg;C</span></div>
-                  })
-                }
-              </div>
-              <div className='col-md-2 col'>
-                {
-                  hourly?.apparent_temperature?.map((ele) => {
-                    return <div className='tdrow'><span className='drowText'>FL TEMP<br/>{Math.round(ele)}&deg;C</span></div>
-                  })
-                }
-              </div>
-              <div className='col-md-2 col'>
-                {
-                  hourly?.windspeed_10m?.map((ele) => {
-                    return <div className='tdrow'><span className='drowText'>WIND<br/>{ele}mph</span></div>
-                  })
-                }
-              </div>
-              <div className='col-md-2 col'>
-                {
-                  hourly?.precipitation?.map((ele) => {
-                    return <div className='tdrow'><span className='drowText'>PRECIP<br/>{ele}in</span></div>
-                  })
-                }
-              </div>
+                )
+              }
             </div>
-
-
+            <div className='col-md-2 col'>
+              {
+                hourly?.weathercode?.map((ele) => {
+                  return <div className='tdrow'>{getSmallIconUrl(ele)}</div>
+                })
+              }
+            </div>
+            <div className='col-md-2 col'>
+              {
+                hourly?.temperature_2m?.map((ele) => {
+                  return <div className='tdrow'><span className='drowText'>TEMP<br />{Math.round(ele)}&deg;C</span></div>
+                })
+              }
+            </div>
+            <div className='col-md-2 col'>
+              {
+                hourly?.apparent_temperature?.map((ele) => {
+                  return <div className='tdrow'><span className='drowText'>FL TEMP<br />{Math.round(ele)}&deg;C</span></div>
+                })
+              }
+            </div>
+            <div className='col-md-2 col'>
+              {
+                hourly?.windspeed_10m?.map((ele) => {
+                  return <div className='tdrow'><span className='drowText'>WIND<br />{ele}mph</span></div>
+                })
+              }
+            </div>
+            <div className='col-md-2 col'>
+              {
+                hourly?.precipitation?.map((ele) => {
+                  return <div className='tdrow'><span className='drowText'>PRECIP<br />{ele}in</span></div>
+                })
+              }
+            </div>
           </div>
 
-        
-        
-        
+
+        </div>
+
+
+
+
       }
     </>
 
